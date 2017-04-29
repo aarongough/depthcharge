@@ -1,7 +1,4 @@
-require "depthcharge/version"
-
 module Depthcharge
-  class Depthcharge
-    
-  end 
+  require "depthcharge/version"
+  require "depthcharge/middleware"
 end
