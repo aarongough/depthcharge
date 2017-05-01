@@ -5,34 +5,30 @@ Depthcharge adds extra logging to `ActionController::Base` in Rails to make it e
 # Example log output
 
 
-	GET "/listings/ads" at 2017-04-28 14:14:34 -0400
-	  | 
-	  | PARAMS:
-	  | 	{"controller"=>"listings", "action"=>"ads"}
-	  |
-	  | HEADERS:
-	  |     HTTP_HOST: "127.0.0.1:3000"
-	  |     HTTP_X_API_VERSION: "1.7.13"
-	  |     HTTP_CONNECTION: "keep-alive"
-	  |     HTTP_X_COUNTRY_CODE: "US"
-	  |     HTTP_IF_NONE_MATCH: "W/\"b3855e44a25de3970bf42c6f35f119b4\""
-	  |     HTTP_ACCEPT: "application/json"
-	  |     HTTP_USER_AGENT: "someApp/5.23.0 iOS/10.2 (iPhone; Retina, Simulator, 1242x2208)"
-	  |     HTTP_ACCEPT_LANGUAGE: "en;q=1"
-	  |     HTTP_CACHE_CONTROL: "max-age=0"
-	  |     HTTP_ACCEPT_ENCODING: "gzip, deflate"
-	  |     HTTP_VERSION: "HTTP/1.1"
-	  | 
-	  | RESPONSE:
-	  |     STATUS: 200
-	  |     BODY:
-	  |        {
-	  |          "ads":{
-	  |             "banner":{
-	  |                "banner_ad":"Buy Slurm!"
-	  |             }
-	  |          }
-	  |        } 
+		GET 200 "/example.json" at 2017-04-30 23:32:16 -0400
+		  | PARAMS:
+		  |   test: "foo"
+		  |
+		  | REQUEST HEADERS:
+		  |   HTTP_HOST: "localhost:4567"
+		  |   HTTP_CONNECTION: "keep-alive"
+		  |   HTTP_CACHE_CONTROL: "max-age=0"
+		  |   HTTP_VERSION: "HTTP/1.1"
+		  |
+		  | RESPONSE STATUS: 200
+		  |
+		  | RESPONSE HEADERS:
+		  |   Content-Type: "application/json"
+		  |   Content-Length: "25"
+		  |
+		  | BODY:
+		  |   {
+		  |     "a": 1,
+		  |     "b": 2,
+		  |     "c": 3,
+		  |     "d": 4
+		  |   }
+		  |
 
 
 
