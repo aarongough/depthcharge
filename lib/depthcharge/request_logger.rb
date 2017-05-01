@@ -14,16 +14,23 @@ module Depthcharge
     end
 
     def log
-      output = ""
-      output << format_line("#{env["REQUEST_METHOD"]} #{env["PATH_INFO"].inspect} at #{Time.now}", 0)
-      output << format_hash("params", request_params(env))
-      output << blank_line
-      output << format_hash("request headers", request_headers(env))
-      output << blank_line
-      output << format_hash("response headers", headers)
-      output << blank_line
+      puts construct_log_entry
+    end
 
-      puts output
+    def construct_log_entry
+      output = ""
+      output << format_line("#{env["REQUEST_METHOD"]} #{status} #{env["PATH_INFO"].inspect} at #{Time.now}", 0)
+      output << format_hash("PARAMS", request_params(env))
+      output << blank_line
+      output << format_hash("REQUEST HEADERS", request_headers(env))
+      output << blank_line
+      output << format_line("RESPONSE STATUS: #{status}")
+      output << blank_line
+      output << format_hash("RESPONSE HEADERS", headers)
+      output << blank_line
+      output << format_line("BODY:")
+      output << format_body(headers, body, 2)
+      output << blank_line
     end
 
   end

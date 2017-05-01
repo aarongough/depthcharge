@@ -1,4 +1,5 @@
 require "rack"
+require "json"
 
 module Depthcharge
   require "depthcharge/version"

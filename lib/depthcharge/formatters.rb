@@ -5,6 +5,15 @@ module Depthcharge
     SUB_INDENT = "  "
     NEWLINE = "\n"
 
+    def format_body(headers, body, level = 1)
+      content_type = headers["Content-Type"]
+      if content_type.include?("json")
+        format_lines(JSON.pretty_generate(JSON.parse(body.join)), level)
+      else
+        format_lines(body.join, level)
+      end
+    end
+
     def format_hash(name, hash, level = 1)
       output = format_line(name.to_s.upcase + ":", level)
 

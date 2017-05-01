@@ -60,4 +60,20 @@ RSpec.describe Depthcharge::Formatters do
       expect(result[2]).to eq(main_indent + sub_indent + 'b: "b"')
     end
   end
+
+  describe "#format_body" do
+    context "when the content type is 'text/html'" do
+      it "returns the body as-is" do
+        expect(format_body({"Content-Type" => "text/html"}, ["Body"])).to eq("  | Body\n")
+      end
+    end
+
+    context "when the content type is 'application/json'" do
+      it "returns the JSON pretty formatted" do
+        json_string = '{"a":{"b":"d"}}'
+
+        expect(format_body({"Content-Type" => "application/json"}, [json_string])).to eq("  | {\n  |   \"a\": {\n  |     \"b\": \"d\"\n  |   }\n  | }\n")
+      end
+    end
+  end
 end

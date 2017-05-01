@@ -21,4 +21,5 @@ RSpec.describe Depthcharge::Filters do
       expect(keys).to contain_exactly("foo")
     end
   end
+  
 end
