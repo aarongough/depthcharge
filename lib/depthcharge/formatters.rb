@@ -1,6 +1,10 @@
 module Depthcharge
   module Formatters
 
+    MAIN_INDENT = "  | "
+    SUB_INDENT = "  "
+    NEWLINE = "\n"
+
     def format_hash(name, hash, level = 1)
       output = format_line(name.to_s.upcase + ":", level)
 
@@ -24,16 +28,13 @@ module Depthcharge
     end
 
     def format_line(line, level = 1)
-      indent(level) + line + "\n"
+      indent(level) + line + NEWLINE
     end
 
     def indent(level)
       return "" if level == 0
 
-      main_indent = "  | "
-      sub_indent = "  "
-
-      main_indent + (sub_indent * (level - 1))
+      MAIN_INDENT + (SUB_INDENT * (level - 1))
     end
 
   end
