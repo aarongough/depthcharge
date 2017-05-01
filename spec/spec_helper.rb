@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "depthcharge"
+require "rack"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

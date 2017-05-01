@@ -8,7 +8,9 @@ module Depthcharge
     end
 
     def call(env)
-      @app.call(env)
+      status, headers, body = @app.call(env)
+      RequestLogger.new(env, status, headers, body).log
+      [status, headers, body]
     end
   end
 end

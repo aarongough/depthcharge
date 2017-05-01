@@ -13,14 +13,18 @@ RSpec.describe Depthcharge::Middleware do
   end
 
   describe "#call" do
+    before do
+      allow_any_instance_of(Depthcharge::RequestLogger).to receive(:log).and_return(:foo)
+    end
+
     it "calls the provided app and passes on environment" do
       middleware.call(env)
       expect(app).to have_received(:call).with(env)
     end
 
     it "returns the result of calling the app" do
-      allow(app).to receive(:call).and_return(:result)
-      expect(middleware.call(env)).to eq(:result)
+      allow(app).to receive(:call).and_return([:a, :b, :c])
+      expect(middleware.call(env)).to eq([:a, :b, :c])
     end
   end
 end
