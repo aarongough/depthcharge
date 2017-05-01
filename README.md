@@ -1,34 +1,34 @@
 # Depthcharge
 
-Depthcharge adds extra logging to `ActionController::Base` in Rails to make it easier to see the requests that are coming and going from a local server to a connected client app (like iOS simulator for example). It will automatically detect JSON responses and pretty print them as well.
+Depthcharge is a piece of Rack middleware that enables extra visibility into the requests going through an application. The primary use case for this is to see the requests that are coming and going from a local server to a connected client app (like iOS simulator for example). Additionally it will automatically detect JSON responses and pretty print.
 
 # Example log output
 
 
-		GET 200 "/example.json" at 2017-04-30 23:32:16 -0400
-		  | PARAMS:
-		  |   test: "foo"
-		  |
-		  | REQUEST HEADERS:
-		  |   HTTP_HOST: "localhost:4567"
-		  |   HTTP_CONNECTION: "keep-alive"
-		  |   HTTP_CACHE_CONTROL: "max-age=0"
-		  |   HTTP_VERSION: "HTTP/1.1"
-		  |
-		  | RESPONSE STATUS: 200
-		  |
-		  | RESPONSE HEADERS:
-		  |   Content-Type: "application/json"
-		  |   Content-Length: "25"
-		  |
-		  | BODY:
-		  |   {
-		  |     "a": 1,
-		  |     "b": 2,
-		  |     "c": 3,
-		  |     "d": 4
-		  |   }
-		  |
+	GET 200 "/example.json" at 2017-04-30 23:32:16 -0400
+	  | PARAMS:
+	  |   test: "foo"
+	  |
+	  | REQUEST HEADERS:
+	  |   HTTP_HOST: "localhost:4567"
+	  |   HTTP_CONNECTION: "keep-alive"
+	  |   HTTP_CACHE_CONTROL: "max-age=0"
+	  |   HTTP_VERSION: "HTTP/1.1"
+	  |
+	  | RESPONSE STATUS: 200
+	  |
+	  | RESPONSE HEADERS:
+	  |   Content-Type: "application/json"
+	  |   Content-Length: "25"
+	  |
+	  | BODY:
+	  |   {
+	  |     "a": 1,
+	  |     "b": 2,
+	  |     "c": 3,
+	  |     "d": 4
+	  |   }
+	  |
 
 
 
