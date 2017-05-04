@@ -59,7 +59,7 @@ use Depthcharge::Middleware, STDOUT, "depthcharge.log"
 
 Rails:
 ```ruby
-# config/application.rb (or)
+# config/application.rb (or) config/environments/development.rb
 config.middleware.use Depthcharge::Middleware, Rails.root.join("log", "depthcharge.log")
 ```
 
