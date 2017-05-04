@@ -1,8 +1,8 @@
 # Depthcharge
 
-Depthcharge is a piece of Rack middleware that enables extra visibility into the requests going through an application. The primary use case for this is to see the requests that are coming and going from a local server to a connected client app (like iOS simulator for example). Additionally it will automatically detect JSON responses and pretty print.
+Depthcharge is a piece of Rack middleware that enables extra visibility into the requests going through an application. The primary use case for this is to see the requests that are coming and going from a local server to a connected client app (like iOS simulator for example). Additionally it will automatically detect JSON responses and pretty print them to enhance readability.
 
-# Example log output
+## Example log output
 
 
 	GET 200 "/example.json" at 2017-04-30 23:32:16 -0400
