@@ -75,5 +75,29 @@ RSpec.describe Depthcharge::Formatters do
         expect(format_body({"Content-Type" => "application/json"}, [json_string])).to eq("  | {\n  |   \"a\": {\n  |     \"b\": \"d\"\n  |   }\n  | }\n")
       end
     end
+
+    context "when given a rack response body" do
+      it "renders the response" do
+        expect {
+          format_body({}, ["ABC"])
+        }.not_to raise_error
+      end
+    end
+
+    context "when given a rails response body" do
+      it "renders the response" do
+        expect {
+          format_body({}, double("RackBody", body: "ABC"))
+        }.not_to raise_error
+      end
+    end
+
+    context "when the content type is not set" do
+      it "does not raise an error" do
+        expect {
+          format_body({}, ["ABC"])
+        }.not_to raise_error
+      end
+    end
   end
 end

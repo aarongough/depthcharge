@@ -7,10 +7,13 @@ module Depthcharge
 
     def format_body(headers, body, level = 1)
       content_type = headers["Content-Type"]
-      if content_type.include?("json")
-        format_lines(JSON.pretty_generate(JSON.parse(body.join)), level)
+      body = body.join if body.respond_to?(:join)
+      body = body.body if body.respond_to?(:body)
+
+      if !content_type.nil? && content_type.include?("json")
+        format_lines(JSON.pretty_generate(JSON.parse(body)), level)
       else
-        format_lines(body.join, level)
+        format_lines(body, level)
       end
     end
 
