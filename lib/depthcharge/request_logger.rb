@@ -13,10 +13,10 @@ module Depthcharge
       @body = body
     end
 
-    def log(outputs)
+    def log(*outputs)
       log_entry = construct_log_entry
 
-      outputs.each do |output|
+      outputs.flatten.each do |output|
         output.puts(log_entry)
         output.flush
       end
