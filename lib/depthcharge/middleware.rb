@@ -1,16 +1,22 @@
 module Depthcharge
   class Middleware
 
-    attr_reader :app, :log_outputs
+    attr_reader :app, :outputs
 
-    def initialize(app, *log_outputs)
+    def initialize(app, *outputs)
       @app = app
-      @log_outputs = log_outputs
+      @outputs = outputs.flatten.map do |output|
+        if output.is_a?(String) || output.is_a?(Pathname)
+          File.open(output, "w")
+        else
+          output
+        end
+      end
     end
 
     def call(env)
       status, headers, body = @app.call(env)
-      RequestLogger.new(env, status, headers, body).log(log_outputs)
+      RequestLogger.new(env, status, headers, body).log(outputs)
       [status, headers, body]
     end
   end

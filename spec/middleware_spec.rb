@@ -10,6 +10,32 @@ RSpec.describe Depthcharge::Middleware do
     it "stores the app correctly" do
       expect(middleware.app).to eq(app)
     end
+
+    it "allows multiple outputs" do
+      file = double(:file)
+      allow(File).to receive(:open).and_return(file)
+
+      middleware = Depthcharge::Middleware.new(app, "foo.log", "bar.log")
+      expect(middleware.outputs).to match_array([file, file])
+    end
+
+    it "converts a string output to a File " do
+      file = double(:file)
+      allow(File).to receive(:open).and_return(file)
+      middleware = Depthcharge::Middleware.new(app, "foo.log")
+
+      expect(File).to have_received(:open).with("foo.log", "w")
+      expect(middleware.outputs.first).to eq(file)
+    end
+
+    it "converts a Pathname output to a File" do
+      file = double(:file)
+      allow(File).to receive(:open).and_return(file)
+      middleware = Depthcharge::Middleware.new(app, Pathname.new("foo.log"))
+
+      expect(File).to have_received(:open)
+      expect(middleware.outputs.first).to eq(file)
+    end
   end
 
   describe "#call" do
