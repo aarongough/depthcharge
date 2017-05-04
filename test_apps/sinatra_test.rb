@@ -4,7 +4,7 @@ require "sinatra/base"
 require "json"
 
 class SinartraTestApp < Sinatra::Base
-  use Depthcharge::Middleware
+  use Depthcharge::Middleware, STDOUT, File.open("depthcharge.log", "w")
 
   get "/example.json" do
     content_type :json
