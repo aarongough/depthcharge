@@ -26,5 +26,21 @@ RSpec.describe Depthcharge::Middleware do
       allow(app).to receive(:call).and_return([:a, :b, :c])
       expect(middleware.call(env)).to eq([:a, :b, :c])
     end
+
+    it "creates a new instance of RequestLogger" do
+      allow(app).to receive(:call).and_return([:a, :b, :c])
+      allow(Depthcharge::RequestLogger).to receive(:new).and_return(spy)
+
+      middleware.call(env)
+      expect(Depthcharge::RequestLogger).to have_received(:new).with(env, :a, :b, :c)
+    end
+
+    it "calls ReguestLogger#log" do
+      logger = spy(:logger)
+      allow(Depthcharge::RequestLogger).to receive(:new).and_return(logger)
+
+      middleware.call(env)
+      expect(logger).to have_received(:log)
+    end
   end
 end
