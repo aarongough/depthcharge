@@ -17,5 +17,8 @@ class SinartraTestApp < Sinatra::Base
     "<head><head/><body><span>Example text</span></body>"
   end
 
+  # Open a browser pointing at the server automtically on OSX
+  `open http://localhost:4567/example.json`
+
   run!
 end

@@ -26,4 +26,7 @@ end
 
 MyApp.initialize!
 
+# Open a browser pointing at the server automtically on OSX
+`open http://localhost:3000/example.json`
+
 Rack::Handler::WEBrick.run(MyApp, :Port => 3000)
