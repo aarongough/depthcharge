@@ -50,8 +50,20 @@ Or install it yourself as:
 
 ## Usage
 
-Just add `gem 'depthcharge'` to your app's Gemfile, preferable in the `development` group.
+Just add `gem 'depthcharge'` to your app's Gemfile, then add the middleware to your app like so:
 
+Sinatra:
+```ruby
+use Depthcharge::Middleware, STDOUT, "depthcharge.log"
+```
+
+Rails:
+```ruby
+# config/application.rb (or)
+config.middleware.use Depthcharge::Middleware, Rails.root.join("log", "depthcharge.log")
+```
+
+You can pass multiple outputs to Depthcharge::Middleware and it will write to each one for each request. Logging to `STDOUT` and a log file simultaneously is a handy use of this as demonstrated above with the Sinatra setup.
 
 ## License
 
