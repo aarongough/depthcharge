@@ -3,7 +3,6 @@ require "spec_helper"
 RSpec.describe Depthcharge::RequestLogger do
 
   let(:env) { Rack::MockRequest.env_for("/blah?foo=1", "HTTP_VERSION" => "HTTP/1.1") }
-
   let(:logger) { Depthcharge::RequestLogger.new(env, "200", {"Content-Type" => "text/html"}, ["Body"]) }
 
   describe ".initialize" do
@@ -27,6 +26,25 @@ RSpec.describe Depthcharge::RequestLogger do
       expect(log).to include("Content-Type")
       expect(log).to include("text/html")
       expect(log).to include("Body")
+    end
+  end
+
+  describe "#log" do
+    let(:output1) { spy(:IO) }
+    let(:output2) { spy(:IO) }
+
+    it "writes to each of the log outputs given" do
+      logger.log([output1, output2])
+
+      expect(output1).to have_received(:puts).with(logger.construct_log_entry)
+      expect(output2).to have_received(:puts).with(logger.construct_log_entry)
+    end
+
+    it "should flush each output after writing" do
+      logger.log([output1, output2])
+
+      expect(output1).to have_received(:flush)
+      expect(output2).to have_received(:flush)
     end
   end
 end

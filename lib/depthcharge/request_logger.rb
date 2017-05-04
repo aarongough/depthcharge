@@ -13,12 +13,18 @@ module Depthcharge
       @body = body
     end
 
-    def log
-      puts construct_log_entry
+    def log(outputs)
+      log_entry = construct_log_entry
+
+      outputs.each do |output|
+        output.puts(log_entry)
+        output.flush
+      end
     end
 
     def construct_log_entry
       output = ""
+      output << blank_line(0)
       output << format_line("#{env["REQUEST_METHOD"]} #{status} #{env["PATH_INFO"].inspect} at #{Time.now}", 0)
       output << format_hash("PARAMS", request_params(env))
       output << blank_line
@@ -31,6 +37,7 @@ module Depthcharge
       output << format_line("BODY:")
       output << format_body(headers, body, 2)
       output << blank_line
+      output << blank_line(0)
     end
 
   end
